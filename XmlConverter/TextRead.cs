@@ -18,9 +18,10 @@ namespace XmlConverter
 
         public List<Person> TextParseFile(string filename)
         {
-            Person person = new Person();
-            FamilyMember familyMember = new FamilyMember();
+            Person person = null;
+            FamilyMember familyMember = null;
             var personList = new List<Person>();
+            bool processingFamily = false;
 
             foreach (var line in File.ReadAllLines(filename)) // ReadAllLines opens the file, reads all the lines and then closes the file
             {
@@ -33,6 +34,7 @@ namespace XmlConverter
                         person.FirstName = TryGetLine(1, segments);
                         person.LastName = TryGetLine(2, segments);
                         personList.Add(person);
+                        processingFamily = false;
                         break;
                     }
                     case "T": // telephone number
@@ -41,7 +43,7 @@ namespace XmlConverter
                             phoneNumber.MobileNumber = TryGetLine(1, segments);
                             phoneNumber.LandlineNumber = TryGetLine(2, segments);
 
-                            if (familyMember == null) // potential family not reached in input yet, person data comes first
+                            if (!processingFamily) // potential family not reached in input yet, person data comes first
                             {
                                 person.PhoneNumber = phoneNumber;
                             }
@@ -58,7 +60,7 @@ namespace XmlConverter
                             adress.City = TryGetLine(2, segments);
                             adress.Zip = TryGetLine(3, segments);
 
-                            if (familyMember == null) // potential family not reached in input yet, person data comes first
+                            if (!processingFamily) // potential family not reached in input yet, person data comes first
                             {
                                 person.Adress = adress;
                             }
@@ -74,6 +76,7 @@ namespace XmlConverter
                             familyMember.Name = TryGetLine(1, segments);
                             familyMember.BirthYear = TryGetLine(2, segments);
                             person.FamilyMembers.Add(familyMember);
+                            processingFamily = true;
                             break;
                     }
                 }

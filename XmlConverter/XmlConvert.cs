@@ -38,7 +38,14 @@ namespace XmlConverter
                     var street = new XElement("street", person.Adress.Street);
                     var zip = new XElement("zip", person.Adress.Zip);
 
-                    personElement.Add(new XElement("adress", street, city, zip));
+                    if(person.Adress.Zip != string.Empty)
+                    { 
+                        personElement.Add(new XElement("adress", street, city, zip));
+                    }
+                    else
+                    {
+                        personElement.Add(new XElement("adress", street, city));
+                    }
                 }
 
                 foreach (var member in person.FamilyMembers)
@@ -62,7 +69,14 @@ namespace XmlConverter
                         var street = new XElement("street", member.Adress.Street);
                         var zip = new XElement("zip", member.Adress.Zip);
 
-                        familyElement.Add(new XElement("adress", street, city, zip));
+                        if (member.Adress.Zip != string.Empty)
+                        {
+                            familyElement.Add(new XElement("adress", street, city, zip));
+                        }
+                        else
+                        {
+                            familyElement.Add(new XElement("adress", street, city));
+                        }
                     }
 
                     personElement.Add(familyElement);
