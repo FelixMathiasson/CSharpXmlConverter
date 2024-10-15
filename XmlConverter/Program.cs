@@ -11,7 +11,7 @@ class Program
         { 
             Console.WriteLine("Enter name of file to parse to XML: ");
 
-            string baseDirectory = AppContext.BaseDirectory; // gets the base directory of the application
+            string baseDirectory = AppContext.BaseDirectory;
             string path = Path.Combine(baseDirectory, "..", "..", "..", "Data", Console.ReadLine()); // combine the base directory with relative path to find the  data file
 
             if (File.Exists(path))

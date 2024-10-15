@@ -9,9 +9,10 @@ namespace XmlConverter
 {
     public class TextRead
     {
-        private string TryGetLine(int row, string[] lines)
+        private string TryGetLine(int index, string[] segments)
         {
-            return lines.Length > row ? lines[row] : string.Empty;
+            //if lines exists, return it. Otherwise return empty string
+            return segments.Length > index ? segments[index] : string.Empty;
         }
 
 
@@ -23,22 +24,22 @@ namespace XmlConverter
 
             foreach (var line in File.ReadAllLines(filename)) // ReadAllLines opens the file, reads all the lines and then closes the file
             {
-                var lines = line.Split('|');
-                switch(lines[0])
+                var segments = line.Split('|');
+                switch(segments[0])
                 {
                     case "P": // line describes person
                     {
                         person = new Person();
-                        person.FirstName = TryGetLine(1, lines);
-                        person.LastName = TryGetLine(2, lines);
-                        personList.Add(person); // as person is added, we edit the memory of the object. Such as adding a phone number, essentially person is memory reference
+                        person.FirstName = TryGetLine(1, segments);
+                        person.LastName = TryGetLine(2, segments);
+                        personList.Add(person);
                         break;
                     }
-                    case "T": // line describes telephone number
+                    case "T": // telephone number
                     {
                             var phoneNumber = new PhoneNumber();
-                            phoneNumber.MobileNumber = TryGetLine(1, lines);
-                            phoneNumber.LandlineNumber = TryGetLine(2, lines);
+                            phoneNumber.MobileNumber = TryGetLine(1, segments);
+                            phoneNumber.LandlineNumber = TryGetLine(2, segments);
 
                             if (familyMember == null) // potential family not reached in input yet, person data comes first
                             {
@@ -50,12 +51,12 @@ namespace XmlConverter
                             }
                             break;
                     }
-                    case "A": // line describes an adress
+                    case "A": // adress
                     {
                             var adress = new Adress();
-                            adress.Street = TryGetLine(1, lines);
-                            adress.City = TryGetLine(2, lines);
-                            adress.Zip = TryGetLine(3, lines);
+                            adress.Street = TryGetLine(1, segments);
+                            adress.City = TryGetLine(2, segments);
+                            adress.Zip = TryGetLine(3, segments);
 
                             if (familyMember == null) // potential family not reached in input yet, person data comes first
                             {
@@ -67,18 +68,18 @@ namespace XmlConverter
                             }
                             break;
                     }
-                    case "F": // line describes family
+                    case "F": // family
                     {
-                            familyMember = new FamilyMember(); // initialize new memory of a family member object, essentially a new memory reference is created and added to the person's family
-                            familyMember.Name = TryGetLine(1, lines);
-                            familyMember.BirthYear = TryGetLine(2, lines);
-                            person.FamilyMembers.Add(familyMember); // add family member to person object
+                            familyMember = new FamilyMember();
+                            familyMember.Name = TryGetLine(1, segments);
+                            familyMember.BirthYear = TryGetLine(2, segments);
+                            person.FamilyMembers.Add(familyMember);
                             break;
                     }
                 }
             }
 
-            return personList; // all lines read, return list of objects with relations
+            return personList;
         }
     }
 }
