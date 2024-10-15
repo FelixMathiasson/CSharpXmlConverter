@@ -1,0 +1,8 @@
+P|
+T|
+A|
+F|A|Haga Slott|
+F|name | 1979
+T|0768-101802|08-101802
+P|Barack|Obama
+A|1600 Pennsylvania Avenue|Washington, D.C
