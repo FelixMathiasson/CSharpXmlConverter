@@ -7,7 +7,7 @@ using XmlConverter.Models;
 
 namespace XmlConverter
 {
-    public class TextParser
+    public class TextRead
     {
         public List<Person> TextParseFile(string filename)
         {
@@ -15,7 +15,7 @@ namespace XmlConverter
             FamilyMember familyMember = new FamilyMember();
             var personList = new List<Person>();
 
-            foreach (var line in File.ReadAllLines(filename))
+            foreach (var line in File.ReadAllLines(filename)) // ReadAllLines opens the file, reads all the lines and then closes the file
             {
                 var lines = line.Split('|');
                 switch(lines[0])
