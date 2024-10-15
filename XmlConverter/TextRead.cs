@@ -27,7 +27,7 @@ namespace XmlConverter
                 var segments = line.Split('|');
                 switch(segments[0])
                 {
-                    case "P": // line describes person
+                    case "P": // person
                     {
                         person = new Person();
                         person.FirstName = TryGetLine(1, segments);
