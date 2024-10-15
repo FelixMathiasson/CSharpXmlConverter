@@ -77,7 +77,6 @@ Should result in the following xml format:
     <adress>
       <street>1600 Pennsylvania Avenue</street>
       <city>Washington, D.C</city>
-      <zip></zip>
     </adress>
   </person>
 </people>
