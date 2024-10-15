@@ -44,6 +44,15 @@ Should result in the following xml format:
   <person>
     <firstname>Carl Gustaf</firstname>
     <lastname>Bernadotte</lastname>
+    <phone>
+      <mobile>0768-101801</mobile>
+      <landline>08-101801</landline>
+    </phone>
+    <adress>
+      <street>Drottningholms slott</street>
+      <city>Stockholm</city>
+      <zip>10001</zip>
+    </adress>
     <family>
       <name>Victoria</name>
       <born>1977</born>
@@ -60,16 +69,15 @@ Should result in the following xml format:
         <mobile>0768-101802</mobile>
         <landline>08-101802</landline>
       </phone>
-      <adress>
-        <street>1600 Pennsylvania Avenue</street>
-        <city>Washington, D.C</city>
-        <zip></zip>
-      </adress>
     </family>
   </person>
   <person>
     <firstname>Barack</firstname>
     <lastname>Obama</lastname>
+    <adress>
+      <street>1600 Pennsylvania Avenue</street>
+      <city>Washington, D.C</city>
+    </adress>
   </person>
 </people>
 ```
